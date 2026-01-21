@@ -1,0 +1,5 @@
+perbedaan dari puts, print dan perbedaan
+
+puts = menambahkan baris baru secara otomatis seperti \n tersembunyi
+print = tidak menambahkan baris baru
+p = hasil output benar-benar sama dengan yang di isi
