@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Lupa Password</h2>
+
+    <form method="post" action="../php/forgot.php">
+        <input type="email" name="email" placeholder="Masukkan Email" required>
+        <input type="password" name="password" id="password" placeholder="Password Baru" required>
+        <input type="password" name="con_password" id="password" placeholder="Konfirmasi Password" required>
+        <center>
+        <label class="checkbox-wrapper">
+        <input type="checkbox" id="showPassword" onclick="togglePassword()">
+        <div class="checkmark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path
+        d="M20 6L9 17L4 12"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+    
+    </div><span class="label">Show Password</span>
+    </label>    
+    </center>
+    <hr>
+        <button type="submit">Reset Password</button>
+    </form>
+
+    <p style="text-align:center; margin-top:15px;">
+        <a href="login.html">Kembali ke Login</a>
+    </p>
+</div>
+    <script src="../js/script.js"></script>
+</body>
+</html>
