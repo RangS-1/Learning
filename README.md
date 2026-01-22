@@ -7,7 +7,6 @@
 ---
 
 ## Description
-This project is ...
 
 Personal repository for documenting my journey **learning everything about programming** 📚💻
 
