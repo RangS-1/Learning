@@ -2,7 +2,7 @@
 
 hujan = true
 
-if hujan
+if hujan # ngerasa aneh pas liat gak pake {}
     puts "Bawa payung!"
 else
     puts "Gak hujan"

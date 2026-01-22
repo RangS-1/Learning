@@ -3,4 +3,4 @@ def hi
     puts message
 end
 
-hi
+hi # buset, gak usah pake puts ato apa gitu 

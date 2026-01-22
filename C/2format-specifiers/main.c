@@ -7,9 +7,9 @@ int main(){
     double pi = 3.81923716874;
     char currency = '$';
     char name[] = "Rangga Wijaya";
+    bool online = true;
 
     printf("%d", age);
     printf("$f", ipk);
-    
     return 0;
 }

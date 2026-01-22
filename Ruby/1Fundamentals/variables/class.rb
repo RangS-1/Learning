@@ -1,7 +1,7 @@
 class Haiwan
     @@type = "Mamalia Lezatos"
 
-    def show_tp
+    def show_tp #function
         puts "Animal Type: #{@@type}"
     end
 end
