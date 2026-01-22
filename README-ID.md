@@ -1,5 +1,13 @@
 # Learning
 
+🌐 Language:
+- [English](README.md)
+- [Indonesian](README-ID.md)
+
+---
+
+## Description
+
 Repository pribadi untuk mencatat proses belajar **semua hal tentang pemrograman** 📚💻
 
 Tujuan utama repo ini adalah sebagai tempat menyimpan:

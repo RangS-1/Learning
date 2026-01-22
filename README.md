@@ -1,5 +1,14 @@
 # Learning
 
+🌐 Language:
+- [English](README.md)
+- [Indonesian](README-ID.md)
+
+---
+
+## Description
+This project is ...
+
 Personal repository for documenting my journey **learning everything about programming** 📚💻
 
 This repo serves as my notebook for:
