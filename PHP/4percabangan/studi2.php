@@ -4,11 +4,14 @@
 
     if ($nilai >= 90){
         echo"Peringkat A";
-    }elseif($nilai >= 80){
+    }
+    elseif($nilai >= 80){
         echo"Peringkat B";
-    }elseif($nilai >= 70){
+    }
+    elseif($nilai >= 70){
         echo"Peringkat C";
-    }else{
+    }
+    else{
         echo"Peringkat D";
     }
 ?>
