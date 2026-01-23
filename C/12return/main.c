@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int square(int num){ //return function!
+int square(int num){ //return function! int, double, bool, string, float
     return num * num; //if it not using return, the int result will not do anything
 }
 
