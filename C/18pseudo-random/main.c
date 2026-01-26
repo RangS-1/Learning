@@ -3,6 +3,8 @@
 #include <time.h> //just time
 
 int main(){
-    int a = rand(); //not yet
+    int a = rand();
+
+    printf("%d", a);
     return 0;
 }
