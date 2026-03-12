@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <!-- Setiap inputan form harus memiliki atribut yang sesuai -->
+        <form>
+    <div>
+        <label for="email">Email</label>
+        <br />
+        <input type="email" id="email" />
+    </div>
+    
+    <div>
+        <label for="password">Password</label>
+        <br />
+        <input type="password" id="password" />
+    </div>
+    
+    <button type="submit">Submit</button>
+        </form>
+    <form method="post" action="https://example.com/jalur/ke/alamat/destinasi"> <!-- Contoh form dengan url absolute dan method post untuk mengirim data secara aman -->
+    </form>
+    <form action="/jalur/ke/alamat/destinasi"> <!-- Contoh form dengan url relative -->
+    </form>
+    <form method="get" action="https://example.com/jalur/ke/alamat/destinasi"> <!-- Contoh form dengan method Get digunakan untuk simpan data di url -->
+    </form>
+</body>
+</html>
