@@ -1,0 +1,74 @@
+span { /* Selector jenis type */
+  color: red;
+}
+.red { /* Selector jenis class */
+  color: red;
+}
+
+.skyblue-bg {
+  background-color: skyblue;
+}
+
+.fancy {
+  font-weight: bold;
+  text-shadow: 4px 4px 3px #77f;
+}
+
+p.fancy {
+  text-shadow: 4px 4px 3px #00c8eb;
+}
+#special { /* Selector jenis id harus menggunakan tanda # */
+  background-color: skyblue;
+}
+/* untuk penggunaaan yang lebih spesifik */
+ul {
+  font-size: 18px;
+}
+
+/* <a> element yang menerapkan href attribute */
+a[href] {
+  color: blue;
+}
+
+/* <a> element yang menerapkan nilai pada href dengan awalan "#" */
+a[href^='#'] {
+  background-color: gold;
+}
+
+/* <a> element yang menerapkan nilai pada href yang mengandung teks "example" */
+a[href*='example'] {
+  background-color: silver;
+}
+
+/* <a> element yang menerapkan nilai pada href yang mengandung teks "insensitive" tidak mementingkan huruf kapital*/
+a[href*='insensitive' i] {
+  color: cyan;
+}
+
+/* <a> element yang menerapkan nilai pada href dengan akhiran ".org" */
+a[href$='.org'] {
+  color: red;
+}
+
+
+/* Menargetkan seluruh tipe elemen / universal selector */
+* {
+  color: green;
+}
+
+/* Menargetkan seluruh tipe elemen yang mengandung nilai "en" pada atribut lang */
+*[lang^='en'] {
+  font-style: italic;
+}
+
+/* Menargetkan seluruh tipe elemen yang memiliki nilai "warning" pada atribut class */
+*.warning {
+  color: red;
+}
+
+/* Menargetkan seluruh tipe elemen yang memiliki nilai "content" pada atribut id */
+*#content {
+  border: 1px solid blue;
+  padding: 20px;
+}
+
