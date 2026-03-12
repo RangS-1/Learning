@@ -1,0 +1,41 @@
+h1 {
+    color: green;
+    text-decoration: none;
+}
+ 
+p {
+    font-size: small;
+    font-family: sans-serif;
+    color: red !important; /* aturan yang dianggap penting */
+}
+
+body {
+    font-family: sans-serif;
+}
+h2, h3 {
+    color: #00a2c6;
+}
+footer {
+    padding: 20px;
+    color: white;
+    background-color: #00a2c6;
+}
+/*
+Rule
+Sebuah aturan styling yang harus diterapkan pada elemen HTML. Dalam sebuah rule, ada selector dan deklarasi properti styling.
+
+Selector
+Bagian yang mengidentifikasi target elemen untuk menetapkan sebuah rule.
+
+Declaration
+Sebuah bagian dari rule yang terdiri dari pasangan properti dan nilainya.
+
+External Style Sheet
+Berkas terpisah yang di dalamnya hanya ada satu atau lebih rules yang akan digunakan pada website.
+
+Embedded Style Sheet
+Kumpulan rules yang dituliskan dalam berkas HTML dengan menggunakan elemen <style>.
+
+Inline Style
+Styling yang diterapkan pada elemen HTML dengan menggunakan atribut style.
+*/
