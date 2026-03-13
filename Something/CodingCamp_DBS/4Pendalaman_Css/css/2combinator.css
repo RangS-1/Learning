@@ -1,0 +1,17 @@
+/* Rule akan diterapkan pada elemen paragraf yang berada tepat setelah elemen img 
+img + p {
+  color: green;
+}*/
+
+/*img ~ p {  Rule akan diterapkan pada semua elemen paragraf yang berada setelah elemen img, tidak harus langsung setelahnya
+  color: green;
+}*/
+
+/* Rule akan diterapkan pada elemen paragraf yang merupakan child dari elemen div */
+div > p {
+  background-color: yellow;
+}
+/* Rule akan diterapkan pada elemen paragraf yang merupakan descendant dari elemen div, tidak harus langsung sebagai child */
+div p {
+  background-color: yellow;
+}
