@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website</title>
+    <link rel="stylesheet" href="style.css"> <!--tambahkan link--> 
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">RangS</div>
+            <ul class="nav-list">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skill">Skills</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">Other</a></li>
+            </ul>
+        </nav>
+        <div class="header-text">
+            <h1>Hello!</h1>
+            <p>I'm a Junior Programmer</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="about-section">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <img src="img/RangS-pfp.png" alt="Profile Picture" class="about-image">
+                <div class="about-text">
+                    <p class="greeting">Hello,</p>
+                    <p class="profession">I'm an IT programmer</p>
+                    <p class="about-description">I was a junior programmer and ethical hacker. 
+                        i'm study at wikrama 1 Garut Vocational High School. I'm currentyly learn Python and Golang.</p>
+                    <hr>
+                    <div class="about-info">
+                        <div>
+                            <p>Name: Rangga Wijaya</p>
+                            <p>Moto: "There's no problem inside a problem"</p>
+                            <p>Email: rangga19sj@gmail.com</p>
+                        </div>
+                        <div>
+                            <p>Age: 16</p>
+                            <p>Address: Indonesian, Garut</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skill" class="skill-section">
+            <h2>Skills</h2>
+            <div class="skill-content">
+                <div class="skill-description">
+                    <p>I'm a Junior Programmer proficient in various programming languages, such as Python and Golang.
+                        I have experience in vulnerability scanning and database management using PosgreSQL. In addition, I understand software
+                        development using PyQt5 and CV2 for a real app.
+                        I like to hear feedback from you and help me to improve.</p>
+                </div>
+                <div class="skill-table">
+                    <div class="skill-label">
+                        <span>Python</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 60%;">
+                            <span class="progress-text">60%</span>
+                        </div>
+                    </div>
+                    <div class="skill-label">
+                        <span>Database Management</span>
+                        <span>20%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 20%;">
+                            <span class="progress-text">20%</span>
+                        </div>
+                    </div>
+                    <div class="skill-label">
+                        <span>Vulnerability Scanning</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 40%;">
+                            <span class="progress-text">40%</span>
+                        </div>
+                    </div>
+                    <div class="skill-label">
+                        <span>Social Engineering</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 70%;">
+                            <span class="progress-text">70%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <main>
+        <section id="project" class="portfolio-section">
+            <h2>Project</h2>
+            <p>I have a lot of project and from that project, it's really help me to improve.</p>
+            <div class="portfolio-container">
+                <div class="card">
+                    <img src="img/virus.png" alt="Ferminal">
+                    <div class="card-body">
+                        <h3>What's Ferminal?</h3>
+                        <p>Ferminal is a terminal emulator for Windows that simplifies command-line operations with aliases!</p>
+                        <button><a href="https://github.com/RangS-1/Ferminal">Visit Project</a></button>
+                    </div>
+                </div>
+            
+                <div class="card">
+                    <img src="img/eon-browser.jpg" alt="Eon-Browser">
+                    <div class="card-body">
+                        <h3>Eon Browser</h3>
+                        <p>Very lightweight and secure to Google Dorking!</p>
+                        <button><a href="https://github.com/RangS-1/Eon-Browser">Visit Project</a></button>
+                    </div>
+                </div>
+            
+                <div class="card">
+                    <img src="img/mp.png" alt="RampS">
+                    <div class="card-body">
+                        <h3>RampS</h3>
+                        <p>Music Player 3 with Python!</p>
+                        <button><a href="https://github.com/RangS-1/Ramps">Visit Project</a></button>
+                    </div>
+                </div>
+            </div>
+            </section>
+        </section>
+    </main>
+    <main class="contact-page">
+        <section id="contact">
+            <center>
+            <h2>Contact</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form action="mailto:rangga19sj@gmail.com" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" value="Send">
+                            <input type="reset" value="Clear">
+                        </div>
+                    </form>
+                </div>
+    
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-details">
+                        <div class="flex-row">
+                            <div>
+                                <span>Call:</span>
+                                <span>(+62) 895-6224-87141</span>
+                            </div>
+                        </div>
+                        <div class="flex-row">
+                            <div>
+                                <span>Email:</span>
+                                <span>rangga19sj@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="flex-row">
+                            <div>
+                                <span>Address:</span>
+                                <span>Indonesian, Garut</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>Follow Me At</h3>
+                    <div class="contact-details">
+                        <div class="flex-row">
+                            <div class="follow">
+                                <span>Instagram:</span>
+                                <a href="https://instagram.com/r4ngg4_s1">@r4ngg4_s1</a>
+                            </div>
+                        </div>
+                        <div class="flex-row">
+                            <div class="follow">
+                                <span>LinkedIn:</span>
+                                <a href="https://linkedin.com/in/rangs/">@RangS</a>
+                            </div>
+                        </div>
+                        <div class="flex-row">
+                            <div class="follow">
+                                <span>Github:</span>
+                                <a href="https://github.com/RangS-1">@RangS-1</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </center>
+    </main>
+    <footer>
+        <p>&copy; 2025 RangS</p>
+    </footer>
+</body>
+
+</html>
