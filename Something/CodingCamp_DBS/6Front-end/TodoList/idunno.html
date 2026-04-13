@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple To-Do List</title>
+</head>
+<body>
+
+    <h1>To-Do List</h1>
+    
+    <div>
+        <input type="text" id="todoInput" placeholder="Apa yang ingin dilakukan?">
+        <button onclick="addTodo()">Tambah</button>
+    </div>
+
+    <hr>
+
+    <h3>Tugas Belum Selesai</h3>
+    <ul id="pendingList"></ul>
+
+    <hr>
+
+    <h3>Tugas Selesai</h3>
+    <ul id="completedList"></ul>
+
+    <script>
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const pendingList = document.getElementById('pendingList');
+            
+            if (input.value.trim() === "") {
+                alert("Input tidak boleh kosong!");
+                return;
+            }
+
+            // Mendapatkan waktu saat ini
+            const now = new Date();
+            const timeString = now.toLocaleString();
+
+            // Membuat elemen list (li)
+            const li = document.createElement('li');
+            
+            // Konten teks
+            const textSpan = document.createElement('span');
+            textSpan.textContent = `${input.value} (Dibuat: ${timeString}) `;
+            
+            // Tombol Centang
+            const checkBtn = document.createElement('button');
+            checkBtn.textContent = "✔";
+            checkBtn.onclick = function() {
+                markAsDone(li, checkBtn);
+            };
+
+            li.appendChild(textSpan);
+            li.appendChild(checkBtn);
+            pendingList.appendChild(li);
+
+            // Reset input
+            input.value = "";
+        }
+
+        function markAsDone(listItem, button) {
+            const completedList = document.getElementById('completedList');
+            
+            // Menghapus tombol centang saat pindah ke kolom selesai
+            listItem.removeChild(button);
+            
+            // Memindahkan elemen ke list selesai
+            completedList.appendChild(listItem);
+        }
+    </script>
+
+</body>
+</html>
