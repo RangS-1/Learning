@@ -138,18 +138,55 @@ function renderTransactions() {
     transaksi.forEach(transaction => {
         const card = document.createElement('div');
         card.className = 'transaction-card';
-        card.setAttribute('data-testid', 'transaction-card');
+        card.setAttribute('data-testid', 'transactionItem');
 
         const title = document.createElement('h3');
         title.textContent = transaction.title;
-        title.setAttribute('data-testid', 'transaction-title');
+        title.setAttribute('data-testid', 'transactionItemTitle');
 
         const amount = document.createElement('p');
-        amount.textContent = `Rp ${transaction.amount}`;
-        amount.setAttribute('data-testid', 'transaction-amount');
+        amount.textContent = `Rp ${transaction.amount.toLocaleString('id-ID')}`;
+        amount.setAttribute('data-testid', 'transactionItemAmount');
+
+        const date = document.createElement('p');
+        date.textContent = transaction.date || '-';
+        date.setAttribute('data-testid', 'transactionItemDate');
+
+        const type = document.createElement('p');
+        type.textContent = transaction.type === 'income' ? 'Pemasukan' : 'Pengeluaran';
+        type.setAttribute('data-testid', 'transactionItemType');
+
+        // Tombol Ubah Tipe
+        const editTypeBtn = document.createElement('button');
+        editTypeBtn.textContent = 'Ubah Tipe';
+        editTypeBtn.setAttribute('data-testid', 'transactionItemEditTypeButton');
+        editTypeBtn.className = 'transaction-btn transaction-btn--change-type';
+        editTypeBtn.addEventListener('click', () => changeTransactionType(transaction.id));
+
+        // Tombol Edit
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.className = 'transaction-btn transaction-btn--edit';
+        editBtn.addEventListener('click', () => editTransaction(transaction.id));
+
+        // Tombol Hapus
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Hapus';
+        deleteBtn.setAttribute('data-testid', 'transactionItemDeleteButton');
+        deleteBtn.className = 'transaction-btn transaction-btn--delete';
+        deleteBtn.addEventListener('click', () => deleteTransaction(transaction.id));
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'transaction-buttons';
+        buttonContainer.appendChild(editTypeBtn);
+        buttonContainer.appendChild(editBtn);
+        buttonContainer.appendChild(deleteBtn);
 
         card.appendChild(title);
         card.appendChild(amount);
+        card.appendChild(date);
+        card.appendChild(type);
+        card.appendChild(buttonContainer);
 
         if (transaction.type === 'income') {
             incomeList.appendChild(card);
@@ -160,6 +197,57 @@ function renderTransactions() {
 }
 
 const transactionForm = document.getElementById('transactionForm');
+let editingTransactionId = null;
+
+/**
+ * Fungsi untuk mengedit transaksi
+ */
+function editTransaction(id) {
+    const transaction = transaksi.find(t => t.id === id);
+    if (transaction) {
+        const titleInput = document.getElementById('transactionFormTitleInput');
+        const amountInput = document.getElementById('transactionFormAmountInput');
+        const dateInput = document.getElementById('transactionFormDateInput');
+        const typeSelect = document.getElementById('transactionFormTypeSelect');
+
+        titleInput.value = transaction.title;
+        amountInput.value = transaction.amount;
+        dateInput.value = transaction.date || '';
+        typeSelect.value = transaction.type;
+
+        editingTransactionId = id;
+        
+        // Ubah label form untuk menunjukkan mode edit
+        const formHeading = document.querySelector('.tracker-form-section__heading');
+        formHeading.textContent = 'Edit Pencatatan';
+    }
+}
+
+/**
+ * Fungsi untuk menghapus transaksi
+ */
+function deleteTransaction(id) {
+    if (confirm('Apakah Anda yakin ingin menghapus transaksi ini?')) {
+        transaksi = transaksi.filter(t => t.id !== id);
+        localStorage.setItem('transactions', JSON.stringify(transaksi));
+        renderTransactions();
+        updateSummary();
+    }
+}
+
+/**
+ * Fungsi untuk mengubah tipe transaksi
+ */
+function changeTransactionType(id) {
+    const transaction = transaksi.find(t => t.id === id);
+    if (transaction) {
+        transaction.type = transaction.type === 'income' ? 'expense' : 'income';
+        localStorage.setItem('transactions', JSON.stringify(transaksi));
+        renderTransactions();
+        updateSummary();
+    }
+}
+
 transactionForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -170,6 +258,7 @@ transactionForm.addEventListener('submit', function(e) {
 
     const title = titleInput.value.trim();
     const amount = parseInt(amountInput.value);
+    const date = dateInput.value;
     const type = typeSelect.value;
 
     if (title === '') {
@@ -182,20 +271,38 @@ transactionForm.addEventListener('submit', function(e) {
         return;
     }
 
-    const transaksibaru = {
-        id: generateId(),
-        title: title,
-        amount: amount,
-        type: type
-    };
+    if (editingTransactionId !== null) {
+        // Mode edit: perbarui transaksi yang ada
+        const transaction = transaksi.find(t => t.id === editingTransactionId);
+        if (transaction) {
+            transaction.title = title;
+            transaction.amount = amount;
+            transaction.date = date;
+            transaction.type = type;
+        }
+        
+        editingTransactionId = null;
+        const formHeading = document.querySelector('.tracker-form-section__heading');
+        formHeading.textContent = 'Tambah Pencatatan Baru';
+    } else {
+        // Mode tambah: tambahkan transaksi baru
+        const transaksibaru = {
+            id: generateId(),
+            title: title,
+            amount: amount,
+            type: type,
+            date: date
+        };
+        transaksi.push(transaksibaru);
+    }
 
-    transaksi.push(transaksibaru);
     localStorage.setItem('transactions', JSON.stringify(transaksi));
     renderTransactions();
     updateSummary();
 
     titleInput.value = '';
     amountInput.value = '';
+    dateInput.value = '';
     typeSelect.value = 'income';
 });
 
@@ -209,10 +316,21 @@ window.addEventListener('load', function() {
 });
 
 const searchtransactionform = document.getElementById('searchTransactionForm');
-searchtransactionform.addEventListener('input', function(e) {
+const searchInput = document.getElementById('searchTransactionFormTitleInput');
+
+searchInput.addEventListener('input', function(e) {
     const keyword = e.target.value.toLowerCase();
-    const filteredTransactions = transaksi.filter(transaction => transaction.title.toLowerCase().includes(keyword));
-    renderFilteredTransactions(filteredTransactions);
+    
+    if (keyword === '') {
+        // Jika pencarian kosong, tampilkan semua transaksi
+        renderTransactions();
+    } else {
+        // Filter dan tampilkan transaksi yang sesuai
+        const filteredTransactions = transaksi.filter(transaction => 
+            transaction.title.toLowerCase().includes(keyword)
+        );
+        renderFilteredTransactions(filteredTransactions);
+    }
 });
 
 function renderFilteredTransactions(filteredTransactions) {
@@ -222,18 +340,55 @@ function renderFilteredTransactions(filteredTransactions) {
     filteredTransactions.forEach(transaction => {
         const card = document.createElement('div');
         card.className = 'transaction-card';
-        card.setAttribute('data-testid', 'transaction-card');
+        card.setAttribute('data-testid', 'transactionItem');
 
         const title = document.createElement('h3');
         title.textContent = transaction.title;
-        title.setAttribute('data-testid', 'transaction-title');
+        title.setAttribute('data-testid', 'transactionItemTitle');
 
         const amount = document.createElement('p');
-        amount.textContent = `US ${transaction.amount}`;
-        amount.setAttribute('data-testid', 'transaction-amount');
+        amount.textContent = `Rp ${transaction.amount.toLocaleString('id-ID')}`;
+        amount.setAttribute('data-testid', 'transactionItemAmount');
+
+        const date = document.createElement('p');
+        date.textContent = transaction.date || '-';
+        date.setAttribute('data-testid', 'transactionItemDate');
+
+        const type = document.createElement('p');
+        type.textContent = transaction.type === 'income' ? 'Pemasukan' : 'Pengeluaran';
+        type.setAttribute('data-testid', 'transactionItemType');
+
+        // Tombol Ubah Tipe
+        const editTypeBtn = document.createElement('button');
+        editTypeBtn.textContent = 'Ubah Tipe';
+        editTypeBtn.setAttribute('data-testid', 'transactionItemEditTypeButton');
+        editTypeBtn.className = 'transaction-btn transaction-btn--change-type';
+        editTypeBtn.addEventListener('click', () => changeTransactionType(transaction.id));
+
+        // Tombol Edit
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.className = 'transaction-btn transaction-btn--edit';
+        editBtn.addEventListener('click', () => editTransaction(transaction.id));
+
+        // Tombol Hapus
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Hapus';
+        deleteBtn.setAttribute('data-testid', 'transactionItemDeleteButton');
+        deleteBtn.className = 'transaction-btn transaction-btn--delete';
+        deleteBtn.addEventListener('click', () => deleteTransaction(transaction.id));
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'transaction-buttons';
+        buttonContainer.appendChild(editTypeBtn);
+        buttonContainer.appendChild(editBtn);
+        buttonContainer.appendChild(deleteBtn);
 
         card.appendChild(title);
         card.appendChild(amount);
+        card.appendChild(date);
+        card.appendChild(type);
+        card.appendChild(buttonContainer);
 
         if (transaction.type === 'income') {
             incomeList.appendChild(card);
