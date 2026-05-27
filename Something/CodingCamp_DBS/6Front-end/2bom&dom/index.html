@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo BOM vs DOM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+        h2 { color: #2c3e50; }
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { background-color: #2980b9; }
+        #dom-target {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Implementasi BOM & DOM</h1>
+    <p>Buka kode sumber untuk melihat penjelasan detail pada komentar JavaScript.</p>
+
+    <div class="section">
+        <h2>1. Implementasi DOM (Document Object Model)</h2>
+        <p>DOM memanipulasi struktur dan konten di dalam dokumen HTML.</p>
+        <p>Teks saat ini: <span id="dom-target">Teks Asli</span></p>
+        <button onclick="manipulasiDOM()">Ubah Teks Lewat DOM</button>
+    </div>
+
+    <div class="section">
+        <h2>2. Implementasi BOM (Browser Object Model)</h2>
+        <p>BOM berinteraksi dengan browser di luar dokumen halaman web.</p>
+        <button onclick="eksekusiBOM()">Tampilkan Info Browser via BOM</button>
+    </div>
+</div>
+
+<script>
+    /**
+     * Fungsi untuk mendemonstrasikan DOM (Document Object Model)
+     */
+    function manipulasiDOM() {
+        // Menggunakan dokumen untuk mencari elemen berdasarkan ID
+        const elemenTeks = document.getElementById('dom-target');
+        
+        // Mengubah konten teks dari elemen yang ditemukan
+        elemenTeks.innerText = "Teks telah berhasil diubah melalui DOM!";
+        
+        // Mengubah gaya (style) warna elemen secara langsung
+        elemenTeks.style.color = "#27ae60";
+        
+        /* PENJELASAN DOM:
+           - 'document' adalah gerbang utama DOM.
+           - Fungsi ini memanipulasi objek di dalam dokumen (halaman web itu sendiri).
+           - Kita mengubah struktur/tampilan elemen HTML tanpa memengaruhi aplikasi browser.
+         */
+    }
+
+    /**
+     * Fungsi untuk mendemonstrasikan BOM (Browser Object Model)
+     */
+    function eksekusiBOM() {
+        // Mengakses objek 'window' dan 'navigator' yang disediakan oleh browser
+        const lebarBrowser = window.innerWidth;
+        const tinggiBrowser = window.innerHeight;
+        const namaBrowser = navigator.userAgent;
+
+        // Menampilkan informasi tersebut menggunakan alert bawaan browser
+        window.alert(
+            "Informasi Browser (BOM):\n\n" +
+            "Ukuran Window: " + lebarBrowser + "x" + tinggiBrowser + " piksel.\n" +
+            "User Agent: " + namaBrowser
+        );
+
+        /* PENJELASAN BOM:
+           - 'window' dan 'navigator' adalah bagian dari BOM.
+           - BOM tidak peduli dengan isi dari dokumen HTML Anda.
+           - Fungsi ini mengambil informasi mengenai lingkungan tempat halaman tersebut berjalan (resolusi layar browser dan jenis browser).
+         */
+    }
+</script>
+
+</body>
+</html>
