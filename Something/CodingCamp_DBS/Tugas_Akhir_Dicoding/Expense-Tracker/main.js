@@ -156,20 +156,17 @@ function renderTransactions() {
         type.textContent = transaction.type === 'income' ? 'Pemasukan' : 'Pengeluaran';
         type.setAttribute('data-testid', 'transactionItemType');
 
-        // Tombol Ubah Tipe
         const editTypeBtn = document.createElement('button');
         editTypeBtn.textContent = 'Ubah Tipe';
         editTypeBtn.setAttribute('data-testid', 'transactionItemEditTypeButton');
         editTypeBtn.className = 'transaction-btn transaction-btn--change-type';
         editTypeBtn.addEventListener('click', () => changeTransactionType(transaction.id));
 
-        // Tombol Edit
         const editBtn = document.createElement('button');
         editBtn.textContent = 'Edit';
         editBtn.className = 'transaction-btn transaction-btn--edit';
         editBtn.addEventListener('click', () => editTransaction(transaction.id));
 
-        // Tombol Hapus
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Hapus';
         deleteBtn.setAttribute('data-testid', 'transactionItemDeleteButton');
