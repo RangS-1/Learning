@@ -35,10 +35,13 @@ function NotesList({ notes, onDelete, onArchive, dataTestId = 'notes-list' }) {
   }, {});
 
   return (
-    <div className="notes-list" data-testid={dataTestId}>
+    <div className="notes-list notes-list--grouped" data-testid={dataTestId}>
       {Object.entries(groupedNotes).map(([monthYear, groupedNotesData]) => (
         <section key={monthYear} className="notes-group">
-          <h3 className="notes-group__title">{monthYear}</h3>
+          <div className="notes-group__header">
+            <h3 className="notes-group__title">{monthYear}</h3>
+            <span className="notes-group__count">{groupedNotesData.length}</span>
+          </div>
           <div className="notes-group__items">
             {/* TODO [Basic] gunakan array.map untuk merender NoteItem untuk setiap catatan. */}
             {/* TODO [Skilled] ekstrak tombol aksi menjadi komponen reusable agar dipakai NoteItem. */}
