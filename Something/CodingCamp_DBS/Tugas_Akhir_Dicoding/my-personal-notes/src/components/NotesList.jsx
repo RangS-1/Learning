@@ -1,7 +1,8 @@
 import React from 'react';
 import NoteItem from './NoteItem';
+import { getMonthYearKey, formatMonthYear } from '../utils/highlightsearch.jsx';
 
-function NotesList({ notes, onDelete, onArchive, dataTestId = 'notes-list' }) {
+function NotesList({ notes, onDelete, onArchive, dataTestId = 'notes-list', searchKeyword = '' }) {
   // TODO [Basic] validasi notes agar tidak kosong.
   const hasNotes = notes && notes.length > 0;
 
@@ -21,26 +22,33 @@ function NotesList({ notes, onDelete, onArchive, dataTestId = 'notes-list' }) {
 
   // TODO [Advanced] kelompokkan catatan per bulan-tahun dan render tiap grup dalam <section className="notes-group">.
   const groupedNotes = notes.reduce((groups, note) => {
-    const date = new Date(note.createdAt);
-    const monthYear = date.toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'long',
-    });
+    const monthYearKey = getMonthYearKey(note.createdAt);
 
-    if (!groups[monthYear]) {
-      groups[monthYear] = [];
+    if (!groups[monthYearKey]) {
+      groups[monthYearKey] = [];
     }
-    groups[monthYear].push(note);
+    groups[monthYearKey].push(note);
     return groups;
   }, {});
 
   return (
     <div className="notes-list notes-list--grouped" data-testid={dataTestId}>
-      {Object.entries(groupedNotes).map(([monthYear, groupedNotesData]) => (
-        <section key={monthYear} className="notes-group">
+      {Object.entries(groupedNotes).map(([monthYearKey, groupedNotesData]) => (
+        <section 
+          key={monthYearKey} 
+          className="notes-group"
+          data-testid={`${monthYearKey}-group`}
+        >
           <div className="notes-group__header">
-            <h3 className="notes-group__title">{monthYear}</h3>
-            <span className="notes-group__count">{groupedNotesData.length}</span>
+            <h3 className="notes-group__title">
+              {formatMonthYear(groupedNotesData[0].createdAt)}
+            </h3>
+            <span 
+              className="notes-group__count"
+              data-testid={`${monthYearKey}-group-count`}
+            >
+              {groupedNotesData.length}
+            </span>
           </div>
           <div className="notes-group__items">
             {/* TODO [Basic] gunakan array.map untuk merender NoteItem untuk setiap catatan. */}
@@ -51,6 +59,7 @@ function NotesList({ notes, onDelete, onArchive, dataTestId = 'notes-list' }) {
                 note={note}
                 onDelete={onDelete}
                 onArchive={onArchive}
+                searchKeyword={searchKeyword}
               />
             ))}
           </div>

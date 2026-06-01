@@ -1,5 +1,6 @@
 import React from 'react';
 import { getInitialData } from '../utils';
+import NoteSearch from './NoteSearch';
 import NoteInput from './NoteInput';
 import NotesList from './NotesList';
 
@@ -82,6 +83,7 @@ class App extends React.Component {
           <h1>Notes</h1>
         </div>
         <div className="note-app__body" data-testid="note-app-body">
+          <NoteSearch onSearch={this.onSearchHandler} />
           <NoteInput addNote={this.onAddNoteHandler} />
           <section
             aria-labelledby="active-notes-title"
@@ -93,6 +95,7 @@ class App extends React.Component {
               onDelete={this.onDeleteHandler}
               onArchive={this.onArchiveHandler}
               dataTestId="active-notes-list"
+              searchKeyword={searchKeyword}
             />
           </section>
           <section
@@ -105,6 +108,7 @@ class App extends React.Component {
               onDelete={this.onDeleteHandler}
               onArchive={this.onArchiveHandler}
               dataTestId="archived-notes-list"
+              searchKeyword={searchKeyword}
             />
           </section>
         </div>
