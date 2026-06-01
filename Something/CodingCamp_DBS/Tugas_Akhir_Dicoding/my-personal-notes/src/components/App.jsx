@@ -81,9 +81,10 @@ class App extends React.Component {
       <div className="note-app" data-testid="note-app">
         <div className="note-app__header" data-testid="note-app-header">
           <h1>Notes</h1>
+          <NoteSearch onSearch={this.onSearchHandler} />
         </div>
         <div className="note-app__body" data-testid="note-app-body">
-          <NoteSearch onSearch={this.onSearchHandler} />
+          
           <NoteInput addNote={this.onAddNoteHandler} />
           <section
             aria-labelledby="active-notes-title"
