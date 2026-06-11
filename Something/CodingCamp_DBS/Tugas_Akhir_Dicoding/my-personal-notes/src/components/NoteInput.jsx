@@ -72,7 +72,7 @@ class NoteInput extends React.Component {
           data-testid="note-input-form"
         >
           {/* TODO [Skilled] tampilkan sisa karakter secara dinamis ketika limit judul diterapkan */}
-          <p
+ zzzz         <p
             className="note-input__title__char-limit"
             data-testid="note-input-title-remaining"
           >
