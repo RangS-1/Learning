@@ -10,6 +10,6 @@ abstract class Buah {
     public function setWarna($warna) {
         $this->warna = $warna;
     }
-
+}
 
 ?>
