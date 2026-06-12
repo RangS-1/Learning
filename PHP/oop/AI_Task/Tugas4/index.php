@@ -32,12 +32,41 @@ class Persegi extends BangunDatar{
         $this->sisi = $sisi;
     }
     public function hitungLuas(){
-        $hasilPersegi = $sisi * $sisi;
-        return $hasilPersegi;
+        return $this->sisi * $this->sisi;
     }
 }
 
-$bangundatar1 = new Persegi("Persegi", 20);
+class Lingkaran extends BangunDatar{
+    public $radius = 0;
+    public function __construct($nama, $radius){
+        parent::__construct($nama);
+        $this->radius = $radius;
+    }
+    public function hitungLuas(){
+        return 3.14 * $this->radius * $this->radius;
+    }
+}
 
-echo $bangundatar1->hitungLuas(20);
+class Segitiga extends BangunDatar{
+    public $alas = 0;
+    public $tinggi = 0;
+    public function __construct($nama, $alas, $tinggi){
+        parent::__construct($nama);
+        $this->alas = $alas;
+        $this->tinggi = $tinggi;
+    }
+    public function hitungLuas(){
+        return 0.5 * $this->alas * $this->tinggi;
+    }
+}
+
+$daftarBangun = array(
+    new Persegi("Persegi", 20),
+    new Lingkaran("Lingkaran", 7),
+    new Segitiga("Segitiga", 10, 15)
+);
+
+foreach($daftarBangun as $bangun){
+    echo $bangun->nama . " : " . $bangun->hitungLuas() . " cm²<br>";
+}
 ?>
