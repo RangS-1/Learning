@@ -76,7 +76,7 @@ class Buku{
     }
 }
 
-class Anggota extends Buku{
+class Anggota{
     public $id = 0,
             $nama = "Nama Anggota",
             $daftarPinjaman = array();
@@ -87,19 +87,33 @@ class Anggota extends Buku{
         $this->daftarPinjaman = array();
     }
 
-    public function pinjamBuku($buku){
-        if ($buku->statusDipinjam){
-            echo "'{$buku->judul}'sedang dipinjam";
+    public function kembalikanBuku($buku) {
+        // Cari buku di dalam daftarPinjaman
+        foreach ($this->daftarPinjaman as $key => $bukuPinjaman) {
+            if ($bukuPinjaman->id == $buku->id) {
+                // Buku ditemukan
+                $buku->kembalikan(); // Ubah status menjadi Tersedia
+                unset($this->daftarPinjaman[$key]); // Hapus dari daftar pinjaman
+                echo "Sukses: {$this->nama} mengembalikan '{$buku->judul}'<br>";
+                return true;
+            }
         }
-        $buku->pinjam();
-        $this->daftarPinjaman[] = $buku;
-        echo "Sukses meminjam buku {$this->nama}";
-        return true;
+
+        // Buku tidak ditemukan di daftar pinjaman
+        echo "Gagal: {$this->nama} tidak meminjam buku '{$buku->judul}'<br>";
+        return false;
     }
 
-    public function kembalikanBuku($id, $penulis){
-        parent::__construct($id);
-        $statusDipinjam = false;
+    public function tampilkanPinjaman() {
+        echo "<strong>📚 Buku yang dipinjam oleh {$this->nama}:</strong><br>";
+        
+        if (empty($this->daftarPinjaman)) {
+            echo "  Tidak ada buku yang dipinjam<br>";
+        } else {
+            foreach ($this->daftarPinjaman as $buku) {
+                echo "  - {$buku->judul} oleh {$buku->penulis}<br>";
+            }
+        }
     }
 }
 
